@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShadowKun的妙妙屋</title>
+	<style type="text/css">
+		.box{
+		   margin:20px auto; /*设置元素外边距*/
+		   text-align: center;
+		}
+		.shine{
+		   font-size:5em; /*设置字体大小*/
+		   font-weight:bolder; /*设置字体粗细*/
+		   color:#FFFFFF; /*设置文字颜色*/
+		   -webkit-animation:light 2s ease-in-out;/*设置动画*/
+           pointer-events: none; /* 禁用鼠标事件 */
+		}
+		@-webkit-keyframes light{/*创建动画*/
+		   to{
+                text-shadow:0 0 0px #fff,
+		                      0 0 2px #fff,
+		                      0 0 6px #333,
+		                      0 0 8px #333,
+		                      0 0 10px #333,
+		                      0 0 12px #333,
+		                      0 0 14px #333,
+		                      0 0 16px #333;
+		   }
+		   from{
+		       text-shadow:0 0 1px #fff,
+		                      0 0 4px #fff,
+		                      0 0 12px #333,
+		                      0 0 16px #333,
+		                      0 0 20px #333,
+		                      0 0 24px #333,
+		                      0 0 28px #333,
+		                      0 0 32px #333;
+		   }
+
+		}
+        /* 页面基础样式 */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+            background-color: white;
+            max-width: 1500px;
+            margin: 50px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-container {
+            display: flex;
+            justify-content: space-between; /* 子元素水平间隔 */
+            padding: 20px;
+            max-width: 1500px;
+            margin: 20px auto;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-size: 2em;
+            margin-bottom: 300px;
+        }
+
+        h4 {
+            color: #333;
+        }
+
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #666;
+            pointer-events: none; /* 禁用鼠标事件 */
+        }
+
+        des {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            text-align: center;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 页面头部 -->
+    <header>
+        <div class="box">
+   		    <a class="shine">欢迎来到</a>
+	    </div>
+        <div class="box">
+   		    <a class="shine">ShadowKun</a>
+	    </div>
+        <div class="box">
+   		    <a class="shine">的妙妙屋</a>
+	    </div>        
+
+        <p>米斯卡，莫斯卡，BANGBANGBANG！</p>
+    </header>
+
+    <!-- 页面主体 -->
+    <div class="main-container">
+        <main>
+            <h4>关于我</h4>
+            <des>你好！我是一个学习 Web 开发的爱好者。这个网页展示了如何使用 HTML 和 CSS 来构建一个基本的网站。</des>
+            <des>接下来我会展示一些功能，如插入图片和创建按钮。</des>
+
+            <!-- 图片展示 -->
+            <img src="https://via.placeholder.com/800x400" alt="示例图片">
+
+            <!-- 按钮链接 -->
+            <a href="https://www.example.com" class="button">访问我的博客</a>
+        </main>
+
+        <main>
+            <h4>关于我</h4>
+            <des>你好！我是一个学习 Web 开发的爱好者。这个网页展示了如何使用 HTML 和 CSS 来构建一个基本的网站。</des>
+            <des>接下来我会展示一些功能，如插入图片和创建按钮。</des>
+
+            <!-- 图片展示 -->
+            <img src="https://via.placeholder.com/800x400" alt="示例图片">
+
+            <!-- 按钮链接 -->
+            <a href="https://www.example.com" class="button">访问我的博客</a>
+        </main>        
+    </div>
+
+    <!-- 页面底部 -->
+    <footer>
+        <p>&copy; ShadowKun的网页. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
