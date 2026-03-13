@@ -1,0 +1,370 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="赛博丁真 QQ 群机器人项目介绍：技术栈、架构设计、RAG 检索方案与运行方式。">
+  <title>赛博丁真 QQ 群机器人 · 项目详情</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4efe9;
+      --surface: #fffaf4;
+      --surface-2: #f0e7dc;
+      --ink: #1b1b1f;
+      --muted: #5f5f6c;
+      --accent: #0d6b5f;
+      --accent-2: #d97a4a;
+      --outline: rgba(27, 27, 31, 0.12);
+      --shadow: 0 18px 40px rgba(27, 27, 31, 0.12);
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+      --container: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "IBM Plex Sans", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #f9e9d9 0%, rgba(249, 233, 217, 0) 60%),
+        radial-gradient(1000px 500px at 100% 0%, #e6f1ee 0%, rgba(230, 241, 238, 0) 55%),
+        var(--bg);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      padding: 24px 0 12px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-family: "Fraunces", serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 0.98rem;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      padding: 6px 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
+      border-bottom-color: var(--accent-2);
+    }
+
+    .hero {
+      padding: 36px 0 24px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 32px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-family: "Fraunces", serif;
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      line-height: 1.1;
+      margin: 0 0 12px;
+    }
+
+    .hero p {
+      font-size: 1.08rem;
+      color: var(--muted);
+      margin: 0 0 18px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      min-height: 44px;
+      padding: 12px 20px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 10px 22px rgba(13, 107, 95, 0.28);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border-color: var(--outline);
+      color: var(--ink);
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .section {
+      padding: 30px 0;
+    }
+
+    .section-title {
+      font-family: "Fraunces", serif;
+      font-size: 2rem;
+      margin: 0 0 12px;
+    }
+
+    .section-desc {
+      margin: 0 0 18px;
+      color: var(--muted);
+      max-width: 780px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid rgba(27, 27, 31, 0.08);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      box-shadow: 0 8px 22px rgba(27, 27, 31, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip {
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(13, 107, 95, 0.12);
+      color: var(--accent);
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+
+    .summary-card {
+      background: var(--surface);
+      border: 1px solid rgba(27, 27, 31, 0.08);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .summary-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .summary-list li { margin-bottom: 8px; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    footer {
+      padding: 30px 0 40px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .two-col { grid-template-columns: 1fr; }
+
+      .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 640px) {
+      .grid-3 { grid-template-columns: 1fr; }
+      .hero { padding-top: 24px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .btn { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="container">
+    <div class="nav">
+      <div class="brand">ShadowKun</div>
+      <nav class="nav-links" aria-label="项目页导航">
+        <a href="index.html">返回主页</a>
+        <a href="https://github.com/Frank-zhang-98/qq_bot_project">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <h1>赛博丁真 QQ 群机器人</h1>
+        <p>目标是把群聊里的资料沉淀为可检索的知识库，并在被 @ 时提供有依据、可追溯的回答。系统由“数据录入/维护”与“群聊响应”两条链路协作完成。</p>
+        <div class="btn-group">
+          <a class="btn btn-primary" href="https://github.com/Frank-zhang-98/qq_bot_project">查看源码</a>
+          <a class="btn btn-secondary" href="index.html#projects">返回项目区</a>
+        </div>
+      </div>
+      <div class="summary-card">
+        <h2 class="section-title" style="margin-bottom: 8px;">项目定位</h2>
+        <ul class="summary-list">
+          <li>面向 QQ 群的知识检索机器人，强调“可追溯、可复用”。</li>
+          <li>把图文/表格/结构化资料统一纳入检索库，减少记忆负担。</li>
+          <li>用流程化的 RAG 检索与对话记忆提升回答质量。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">技术栈</h2>
+      <p class="section-desc">核心技术来自代码与依赖配置，覆盖机器人框架、检索引擎、向量库、UI 与模型服务。</p>
+      <div class="chips">
+        <span class="chip">Python</span>
+        <span class="chip">NoneBot2</span>
+        <span class="chip">OneBot v11</span>
+        <span class="chip">LangGraph</span>
+        <span class="chip">Streamlit</span>
+        <span class="chip">Qdrant</span>
+        <span class="chip">BM25 (rank-bm25)</span>
+        <span class="chip">FlashRank</span>
+        <span class="chip">Jieba</span>
+        <span class="chip">SQLite</span>
+        <span class="chip">DeepSeek (OpenAI 兼容)</span>
+        <span class="chip">Qwen-VL 图像解析</span>
+        <span class="chip">httpx / requests</span>
+        <span class="chip">python-dotenv</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">设计方案（系统拆解）</h2>
+      <p class="section-desc">整体方案遵循“内容入库 → 混合检索 → 提示词拼装 → 群聊应答”的闭环设计。</p>
+      <div class="grid-3">
+        <article class="card">
+          <span>链路 A · 内容入库</span>
+          <h3>Streamlit 录入/维护台</h3>
+          <p>扫描目录或上传文件，支持图片结构化、文档预览编辑、增量更新与删除同步。</p>
+        </article>
+        <article class="card">
+          <span>链路 B · 检索引擎</span>
+          <h3>向量 + BM25 双检索</h3>
+          <p>将分片写入 Qdrant，配套 BM25 索引与 FlashRank 重排，保证召回与精排。</p>
+        </article>
+        <article class="card">
+          <span>链路 C · 群聊响应</span>
+          <h3>LangGraph 流程编排</h3>
+          <p>入口解析 → 触发判断 → 记忆加载 → RAG 检索 → LLM 生成 → 存储总结。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">核心流程</h2>
+      <div class="summary-card">
+        <ul class="summary-list">
+          <li>文本/图片/CSV/JSONL 统一解析为文档对象，写入 `all_docs.jsonl`。</li>
+          <li>按 chunk_size + overlap 切分，产出 `chunks.jsonl` 并生成 embedding。</li>
+          <li>Qdrant 执行向量检索，BM25 负责关键词检索，二者候选合并后用 FlashRank 重排。</li>
+          <li>群聊事件进入 LangGraph：判断是否 @ 机器人 → 取历史与摘要 → 检索 worldbook → 生成回复。</li>
+          <li>消息写入 SQLite，按会话维度做 12 条一次的摘要更新。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">数据与存储设计</h2>
+      <div class="two-col">
+        <div class="summary-card">
+          <h3>结构化文件</h3>
+          <ul class="summary-list">
+            <li>`data/structured/all_docs.jsonl`：原始文档集合。</li>
+            <li>`data/structured/chunks.jsonl`：分片结果，便于排查。</li>
+            <li>`data/bm25/index.pkl`：BM25 索引。</li>
+          </ul>
+        </div>
+        <div class="summary-card">
+          <h3>会话记忆</h3>
+          <ul class="summary-list">
+            <li>`data/bot.sqlite`：记录群聊消息与摘要。</li>
+            <li>按群 + 用户 + 角色维度生成 session key。</li>
+            <li>摘要用于压缩长期记忆，避免提示词过长。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">运行方式</h2>
+      <p class="section-desc">运行前需要配置 `.env`，确保 Qdrant 与模型服务可用。</p>
+      <div class="summary-card">
+        <ul class="summary-list">
+          <li>启动数据录入工具：`streamlit run app_streamlit.py`</li>
+          <li>启动 QQ 机器人：`python -m bot.main`</li>
+          <li>本地对话测试：`python tools/chat_local.py`</li>
+          <li>OneBot v11：在 NapCat/LLOneBot 配置反向 WS。</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© 2026 ShadowKun · QQ Bot 项目详情页</div>
+  </footer>
+</body>
+</html>
