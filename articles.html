@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ShadowKun 的微信公众号文章归档，整理近期公开发布的技术和行业观察文章。">
+  <title>文章归档 · ShadowKun</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #071312;
+      --bg-2: #0a1918;
+      --surface: rgba(9, 24, 23, 0.82);
+      --surface-strong: rgba(12, 31, 29, 0.92);
+      --ink: #f6e7d6;
+      --muted: #bba993;
+      --muted-soft: #8e8173;
+      --line: rgba(201, 179, 152, 0.16);
+      --line-strong: rgba(201, 179, 152, 0.24);
+      --accent: #f1dcc1;
+      --accent-2: #8cf3ce;
+      --accent-3: #ffb57a;
+      --shadow: 0 24px 64px rgba(0, 0, 0, 0.34);
+      --shadow-strong: 0 30px 80px rgba(0, 0, 0, 0.42);
+      --container: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "IBM Plex Sans", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.7;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(41, 122, 100, 0.2), transparent 28%),
+        radial-gradient(circle at 82% 14%, rgba(255, 181, 122, 0.08), transparent 24%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::before {
+      background:
+        linear-gradient(90deg, rgba(233, 214, 191, 0.05) 1px, transparent 1px) 0 0 / 160px 160px,
+        linear-gradient(rgba(233, 214, 191, 0.05) 1px, transparent 1px) 0 0 / 160px 160px;
+      opacity: 0.55;
+    }
+
+    body::after {
+      background:
+        radial-gradient(circle at 50% 0%, rgba(140, 243, 206, 0.08), transparent 38%),
+        radial-gradient(circle at 50% 100%, rgba(255, 181, 122, 0.05), transparent 32%);
+      animation: ambientShift 16s ease-in-out infinite alternate;
+    }
+
+    @keyframes ambientShift {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      100% {
+        transform: translate3d(0, -18px, 0) scale(1.04);
+      }
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: 12px;
+      z-index: 999;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #102725;
+      color: var(--accent);
+      border: 1px solid var(--line-strong);
+    }
+
+    .skip-link:focus {
+      left: 12px;
+    }
+
+    .site {
+      position: relative;
+      z-index: 1;
+    }
+
+    .container {
+      width: min(100%, var(--container));
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .topbar {
+      padding-top: 18px;
+    }
+
+    .nav-grid {
+      display: grid;
+      grid-template-columns: minmax(220px, 1.35fr) repeat(4, minmax(90px, 1fr));
+      border: 1px solid var(--line);
+      background: rgba(7, 19, 18, 0.68);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    }
+
+    .nav-grid > * {
+      min-height: 68px;
+      border-right: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      padding: 0 18px;
+    }
+
+    .nav-grid > *:last-child {
+      border-right: none;
+    }
+
+    .brand {
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(140, 243, 206, 0.24), rgba(255, 181, 122, 0.2));
+      border: 1px solid rgba(241, 220, 193, 0.18);
+      color: var(--accent);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.95rem;
+    }
+
+    .brand-copy strong {
+      display: block;
+      font-family: "Noto Sans SC", "IBM Plex Sans", "Microsoft YaHei", sans-serif;
+      font-size: 1.32rem;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .brand-copy span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted-soft);
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    .nav-link {
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-family: "IBM Plex Mono", monospace;
+      transition: color 0.22s ease, background-color 0.22s ease, box-shadow 0.22s ease;
+      min-width: 44px;
+      min-height: 68px;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus-visible,
+    .nav-link.is-current {
+      color: var(--accent);
+      background: rgba(255, 255, 255, 0.03);
+      box-shadow: inset 0 -1px 0 rgba(140, 243, 206, 0.22);
+    }
+
+    main {
+      padding-bottom: 40px;
+    }
+
+    .status-line {
+      padding: 16px 0 0;
+      color: var(--muted-soft);
+      font-size: 0.88rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    section {
+      border-top: 1px solid var(--line);
+    }
+
+    .hero {
+      padding: 46px 0 0;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(300px, 0.98fr);
+      gap: 24px;
+      align-items: end;
+    }
+
+    .hero-copy {
+      padding: 10px 0 34px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--muted);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.84rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 38px;
+      height: 1px;
+      background: rgba(241, 220, 193, 0.22);
+    }
+
+    h1,
+    h2,
+    h3,
+    strong {
+      font-family: "Noto Sans SC", "IBM Plex Sans", "Microsoft YaHei", sans-serif;
+    }
+
+    .hero-title {
+      margin: 16px 0 0;
+      max-width: 9ch;
+      font-size: clamp(2.8rem, 6vw, 5.4rem);
+      line-height: 0.94;
+      letter-spacing: -0.06em;
+      text-wrap: balance;
+    }
+
+    .hero-title span {
+      display: block;
+    }
+
+    .hero-desc {
+      margin: 22px 0 0;
+      max-width: 31rem;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.9;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .action-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      border: 1px solid var(--line-strong);
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--accent);
+      font-weight: 600;
+      transition: transform 0.22s ease, border-color 0.22s ease, background-color 0.22s ease;
+    }
+
+    .action-link:hover,
+    .action-link:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(140, 243, 206, 0.34);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .action-link.primary {
+      background: linear-gradient(135deg, rgba(140, 243, 206, 0.14), rgba(255, 181, 122, 0.08));
+    }
+
+    .frame {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(8, 21, 20, 0.78), rgba(10, 25, 24, 0.72));
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      transform: translateZ(0);
+    }
+
+    .frame::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(140, 243, 206, 0.08), transparent 24%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 28%);
+      pointer-events: none;
+    }
+
+    .hero-panel {
+      min-height: 100%;
+      padding: 24px;
+      display: grid;
+      gap: 14px;
+      align-content: end;
+    }
+
+    .panel-kicker,
+    .panel-stat-label {
+      color: var(--muted);
+      font-family: "IBM Plex Mono", monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .panel-kicker {
+      font-size: 0.84rem;
+    }
+
+    .hero-panel p,
+    .article-card p,
+    .section-desc {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.99rem;
+      line-height: 1.84;
+    }
+
+    .panel-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .panel-stat {
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .panel-stat strong {
+      display: block;
+      font-size: 1.28rem;
+      line-height: 1;
+      color: var(--accent);
+      margin-top: 8px;
+    }
+
+    .panel-stat-label {
+      font-size: 0.75rem;
+    }
+
+    .section-shell {
+      padding: 52px 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 430px);
+      gap: 22px;
+      align-items: end;
+      margin-bottom: 28px;
+    }
+
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--muted);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .section-kicker::before {
+      content: "";
+      width: 38px;
+      height: 1px;
+      background: rgba(241, 220, 193, 0.22);
+    }
+
+    .section-title {
+      margin: 10px 0 0;
+      max-width: 12ch;
+      font-size: clamp(1.58rem, 2.35vw, 2.4rem);
+      line-height: 1.1;
+      text-wrap: balance;
+    }
+
+    .archive-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .article-card {
+      min-height: 348px;
+      padding: 24px 24px 22px;
+      display: grid;
+      grid-template-rows: auto auto auto 1fr auto;
+      gap: 14px;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.22s ease, border-color 0.22s ease, background-color 0.22s ease;
+    }
+
+    .article-card:hover,
+    .article-card:focus-within {
+      transform: translateY(-4px);
+      border-color: rgba(241, 220, 193, 0.28);
+      background: rgba(255, 255, 255, 0.04);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .article-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .article-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .article-date {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 14px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.025);
+      color: var(--accent);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+    }
+
+    .article-track {
+      color: var(--accent-2);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.76rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: right;
+      padding-top: 3px;
+    }
+
+    .article-card h3 {
+      margin: 0;
+      font-size: clamp(1.08rem, 1.4vw, 1.24rem);
+      line-height: 1.28;
+      letter-spacing: -0.03em;
+      max-width: 16.5ch;
+      min-height: 4.1em;
+      text-wrap: balance;
+    }
+
+    .article-card p {
+      max-width: 34ch;
+      font-size: 0.95rem;
+      line-height: 1.76;
+    }
+
+    .article-foot {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+    }
+
+    .article-source {
+      color: var(--accent);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .article-open {
+      color: var(--accent-2);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .article-open::after {
+      content: "→";
+      margin-left: 8px;
+    }
+
+    .article-card-hit {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      border-radius: inherit;
+    }
+
+    .article-card-hit:focus-visible {
+      outline: 2px solid rgba(140, 243, 206, 0.58);
+      outline-offset: -2px;
+    }
+
+    .topic-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .topic-card {
+      padding: 24px;
+      display: grid;
+      gap: 15px;
+    }
+
+    .topic-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .topic-card strong {
+      display: block;
+      font-size: 1.02rem;
+      line-height: 1.3;
+    }
+
+    .topic-count {
+      color: var(--accent-2);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .topic-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.74;
+      max-width: 34ch;
+    }
+
+    .topic-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .topic-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.025);
+      color: var(--accent);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.76rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+
+    .footer-grid > div {
+      min-height: 64px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 18px;
+      color: var(--muted-soft);
+      font-size: 0.84rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-family: "IBM Plex Mono", monospace;
+      transition: background-color 0.22s ease, color 0.22s ease;
+      text-align: center;
+    }
+
+    .footer-grid > div:hover {
+      background: rgba(255, 255, 255, 0.025);
+      color: var(--accent);
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .section-head,
+      .archive-grid,
+      .topic-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-title,
+      .section-title {
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .nav-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .brand {
+        grid-column: 1 / -1;
+      }
+
+      .panel-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      .hero {
+        padding-top: 28px;
+      }
+
+      .hero-title {
+        font-size: clamp(2.32rem, 15vw, 3.32rem);
+      }
+
+      .hero-desc,
+      .hero-panel p,
+      .article-card p,
+      .section-desc {
+        font-size: 0.95rem;
+        line-height: 1.78;
+      }
+
+      .article-card,
+      .topic-card,
+      .hero-panel {
+        padding: 20px;
+      }
+
+      .article-card {
+        min-height: 0;
+        gap: 12px;
+      }
+
+      .article-card h3 {
+        min-height: 0;
+        max-width: none;
+      }
+
+      .article-track {
+        font-size: 0.72rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <div class="site">
+    <header class="topbar container">
+      <div class="nav-grid">
+        <a class="brand" href="index.html">
+          <span class="brand-mark">
+            <span class="brand-badge">SK</span>
+            <span class="brand-copy">
+              <strong>ShadowKun</strong>
+              <span>Project Archive</span>
+            </span>
+          </span>
+        </a>
+        <a class="nav-link" href="index.html">首页</a>
+        <a class="nav-link" href="wechat-agent-lite.html">最新项目</a>
+        <a class="nav-link is-current" href="articles.html">文章</a>
+        <a class="nav-link" href="index.html#about">关于</a>
+      </div>
+    </header>
+
+    <main id="main" class="container">
+      <div class="status-line">更新于 2026 年 4 月 · 微信公众号公开文章归档</div>
+
+      <section class="hero">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow">文章归档 / 微信公众号</div>
+            <h1 class="hero-title">
+              <span>公众号文章</span>
+              <span>归档</span>
+            </h1>
+            <p class="hero-desc">首页保留精选，这里把已经公开发出的文章完整列出来。点卡片就能直接打开原文。</p>
+            <div class="hero-actions">
+              <a class="action-link primary" href="index.html#writing">回首页文章</a>
+              <a class="action-link" href="index.html#projects">查看项目区</a>
+            </div>
+          </div>
+
+          <aside class="frame hero-panel" aria-label="文章归档概览">
+            <div class="panel-kicker">归档概览</div>
+            <p>这一批文章主要集中在 2026 年 3 月到 4 月，技术向内容仍然是主轴，行业观察作为补充。归档页只做入口整理，不重复写一版二次摘要。</p>
+            <div class="panel-grid">
+              <div class="panel-stat">
+                <div class="panel-stat-label">文章数</div>
+                <strong>8</strong>
+              </div>
+              <div class="panel-stat">
+                <div class="panel-stat-label">时间段</div>
+                <strong>03-04</strong>
+              </div>
+              <div class="panel-stat">
+                <div class="panel-stat-label">渠道</div>
+                <strong>WeChat</strong>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-shell">
+          <div class="section-head">
+            <div>
+              <div class="section-kicker">全部文章</div>
+              <h2 class="section-title">最近发出的文章</h2>
+            </div>
+            <p class="section-desc">按发布时间从新到旧排列。文章标题和链接都来自你当前公众号后台的已发表记录。</p>
+          </div>
+
+          <div class="archive-grid">
+            <article class="frame article-card">
+              <div class="article-head">
+                <div class="article-date">04.19</div>
+                <div class="article-track">Industry / Auto</div>
+              </div>
+              <h3>长城汽车董事长魏建军发布：兼容 5 种动力形式</h3>
+              <p>围绕燃油、插混、油混、纯电和氢能的兼容路线展开，偏产业方向和产品判断。</p>
+              <div class="article-foot">
+                <span class="article-source">微信原文</span>
+                <span class="article-open">打开原文</span>
+              </div>
+              <a class="article-card-hit" href="https://mp.weixin.qq.com/s/ILsXfCNBwaWzC3V9aVnr6Q" target="_blank" rel="noopener noreferrer" aria-label="打开公众号文章：长城汽车董事长魏建军发布：兼容 5 种动力形式"></a>
+            </article>
+
+            <article class="frame article-card">
+              <div class="article-head">
+                <div class="article-date">04.11</div>
+                <div class="article-track">Mobility / AI</div>
+              </div>
+              <h3>滴滴在智能电动汽车发展高层论坛发布智能驾驶最新进展</h3>
+              <p>记录滴滴在论坛上的智能驾驶进展发布，偏自动驾驶能力和行业信号观察。</p>
+              <div class="article-foot">
+                <span class="article-source">微信原文</span>
+                <span class="article-open">打开原文</span>
+              </div>
+              <a class="article-card-hit" href="https://mp.weixin.qq.com/s/gi6g3yJJouJfAlX3YIFiGg" target="_blank" rel="noopener noreferrer" aria-label="打开公众号文章：滴滴在智能电动汽车发展高层论坛发布智能驾驶最新进展"></a>
+            </article>
+
+            <article class="frame article-card">
+              <div class="article-head">
+                <div class="article-date">04.10</div>
+                <div class="article-track">Agent / Systems</div>
+              </div>
+              <h3>Everything-Claude-Code 开源系统解析：AI Agent 性能优化与工程化控制平面设计</h3>
+              <p>聚焦 AI Agent 工程化控制平面、性能优化与系统设计，也是目前和站点项目最贴近的一篇。</p>
+              <div class="article-foot">
+                <span class="article-source">微信原文</span>
+                <span class="article-open">打开原文</span>
+              </div>
+              <a class="article-card-hit" href="https://mp.weixin.qq.com/s/IyZuhuNcVA2_8800Sxrj5w" target="_blank" rel="noopener noreferrer" aria-label="打开公众号文章：Everything-Claude-Code 开源系统解析"></a>
+            </article>
+
+            <article class="frame article-card">
+              <div class="article-head">
+                <div class="article-date">04.08</div>
+                <div class="article-track">Security / Runtime</div>
+              </div>
+              <h3>开源零信任 AI Agent 安全运行时 Agent Armor：八层确定性检查管道设计与 2.4 毫秒低延迟实现</h3>
+              <p>围绕零信任 Agent 安全运行时、确定性检查管道和低延迟实现，偏执行控制层。</p>
+              <div class="article-foot">
+                <span class="article-source">微信原文</span>
+                <span class="article-open">打开原文</span>
+              </div>
+              <a class="article-card-hit" href="https://mp.weixin.qq.com/s/Z1rZT1od2HacDtRNue_xnw" target="_blank" rel="noopener noreferrer" aria-label="打开公众号文章：开源零信任 AI Agent 安全运行时 Agent Armor"></a>
+            </article>
+
+            <article class="frame article-card">
+              <div class="article-head">
+                <div class="article-date">04.06</div>
+                <div class="article-track">RAG / Retrieval</div>
+              </div>
+              <h3>不用向量数据库，RAG 准确率竟达 98.7%？</h3>
+              <p>讨论 RAG 检索路径、准确率和系统取舍，不把向量数据库当作默认唯一答案。</p>
+              <div class="article-foot">
+                <span class="article-source">微信原文</span>
+                <span class="article-open">打开原文</span>
+              </div>
+              <a class="article-card-hit" href="https://mp.weixin.qq.com/s/qxcDPAz1XK0-DFjBxs6j9Q" target="_blank" rel="noopener noreferrer" aria-label="打开公众号文章：不用向量数据库，RAG 准确率竟达 98.7%"></a>
+            </article>
+
+            <article class="frame article-card">
+              <div class="article-head">
+                <div class="article-date">04.03</div>
+                <div class="article-track">Models / Benchmarks</div>
+              </div>
+              <h3>中国最强编程模型诞生！阿里千问 3.6 登顶全球权威盲测榜</h3>
+              <p>围绕千问 3.6 的盲测榜表现展开，偏模型能力变化和行业竞争格局观察。</p>
+              <div class="article-foot">
+                <span class="article-source">微信原文</span>
+                <span class="article-open">打开原文</span>
+              </div>
+              <a class="article-card-hit" href="https://mp.weixin.qq.com/s/uwgLrRviw_yO6hXcHBgHXQ" target="_blank" rel="noopener noreferrer" aria-label="打开公众号文章：中国最强编程模型诞生！阿里千问 3.6 登顶全球权威盲测榜"></a>
+            </article>
+
+            <article class="frame article-card">
+              <div class="article-head">
+                <div class="article-date">04.01</div>
+                <div class="article-track">Operations / Supply Chain</div>
+              </div>
+              <h3>AI 供应链平台：65 个 SKU 风险分钟级响应</h3>
+              <p>从供应链平台案例切入，关注分钟级风险响应、系统闭环和业务执行节奏。</p>
+              <div class="article-foot">
+                <span class="article-source">微信原文</span>
+                <span class="article-open">打开原文</span>
+              </div>
+              <a class="article-card-hit" href="https://mp.weixin.qq.com/s/zI2ljmg5TmiB-PUbn-h3oQ" target="_blank" rel="noopener noreferrer" aria-label="打开公众号文章：AI 供应链平台：65 个 SKU 风险分钟级响应"></a>
+            </article>
+
+            <article class="frame article-card">
+              <div class="article-head">
+                <div class="article-date">03.31</div>
+                <div class="article-track">Energy / Agents</div>
+              </div>
+              <h3>AI Agent 赋能能源：自动化电网管理与交易，年省数千万美元</h3>
+              <p>围绕自动化电网管理与交易展开，关注 Agent 在能源场景里的实际落地价值。</p>
+              <div class="article-foot">
+                <span class="article-source">微信原文</span>
+                <span class="article-open">打开原文</span>
+              </div>
+              <a class="article-card-hit" href="https://mp.weixin.qq.com/s/7_feN-tZUVXENRrnqPzY0g" target="_blank" rel="noopener noreferrer" aria-label="打开公众号文章：AI Agent 赋能能源：自动化电网管理与交易，年省数千万美元"></a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-shell">
+          <div class="section-head">
+            <div>
+              <div class="section-kicker">主题索引</div>
+              <h2 class="section-title">按主题看</h2>
+            </div>
+            <p class="section-desc">不按时间翻的话，可以先从主题切进去。这里不重复列文章名，只保留更适合导航的线索。</p>
+          </div>
+
+          <div class="topic-grid">
+            <article class="frame topic-card">
+              <div class="topic-head">
+                <strong>Agent 与系统实现</strong>
+                <span class="topic-count">2 篇</span>
+              </div>
+              <p>偏工程化控制平面、安全运行时和系统边界，和站点里的项目页关系最近。</p>
+              <div class="topic-tags">
+                <span class="topic-tag">控制平面</span>
+                <span class="topic-tag">运行安全</span>
+                <span class="topic-tag">基础设施</span>
+              </div>
+            </article>
+
+            <article class="frame topic-card">
+              <div class="topic-head">
+                <strong>检索、模型与知识链路</strong>
+                <span class="topic-count">2 篇</span>
+              </div>
+              <p>偏 RAG、检索路径和模型能力判断，适合和知识代理、群聊检索这条线一起看。</p>
+              <div class="topic-tags">
+                <span class="topic-tag">混合 RAG</span>
+                <span class="topic-tag">模型评测</span>
+                <span class="topic-tag">知识链路</span>
+              </div>
+            </article>
+
+            <article class="frame topic-card">
+              <div class="topic-head">
+                <strong>产业系统与业务执行</strong>
+                <span class="topic-count">2 篇</span>
+              </div>
+              <p>偏真实业务场景里的自动化系统，从风险响应到能源交易，关注能不能跑通闭环。</p>
+              <div class="topic-tags">
+                <span class="topic-tag">供应链</span>
+                <span class="topic-tag">业务执行</span>
+                <span class="topic-tag">自动化闭环</span>
+              </div>
+            </article>
+
+            <article class="frame topic-card">
+              <div class="topic-head">
+                <strong>汽车与智能驾驶观察</strong>
+                <span class="topic-count">2 篇</span>
+              </div>
+              <p>偏汽车产品路线、智能驾驶进展和行业公开发布，属于更贴近现实世界部署的一组观察。</p>
+              <div class="topic-tags">
+                <span class="topic-tag">汽车</span>
+                <span class="topic-tag">智驾</span>
+                <span class="topic-tag">行业观察</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="container">
+      <div class="footer-grid">
+        <div>© 2026 ShadowKun</div>
+        <div>公众号文章归档</div>
+        <div>所有卡片都直接打开原文</div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

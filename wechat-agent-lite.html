@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="赛博丁真 QQ 群机器人项目详情：面向群聊知识检索、RAG 流程编排、会话记忆与内容维护台。">
-  <title>赛博丁真 QQ 群机器人 · 项目详情</title>
+  <meta name="description" content="wechat-agent-lite 项目详情：面向微信公众号内容生产的自动化系统，支持抓取、选题、写作、发布和运维观察。">
+  <title>wechat-agent-lite · 项目详情</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,9 +28,13 @@
       --container: 1100px;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       margin: 0;
@@ -69,8 +73,12 @@
     }
 
     @keyframes ambientShift {
-      0% { transform: translate3d(0, 0, 0) scale(1); }
-      100% { transform: translate3d(0, -18px, 0) scale(1.04); }
+      0% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      100% {
+        transform: translate3d(0, -18px, 0) scale(1.04);
+      }
     }
 
     a {
@@ -90,7 +98,9 @@
       border: 1px solid var(--line-strong);
     }
 
-    .skip-link:focus { left: 12px; }
+    .skip-link:focus {
+      left: 12px;
+    }
 
     .site {
       position: relative;
@@ -103,7 +113,9 @@
       padding: 0 20px;
     }
 
-    .topbar { padding-top: 18px; }
+    .topbar {
+      padding-top: 18px;
+    }
 
     .nav-grid {
       display: grid;
@@ -122,7 +134,9 @@
       padding: 0 18px;
     }
 
-    .nav-grid > *:last-child { border-right: none; }
+    .nav-grid > *:last-child {
+      border-right: none;
+    }
 
     .brand {
       justify-content: space-between;
@@ -146,7 +160,6 @@
       color: var(--accent);
       font-family: "IBM Plex Mono", monospace;
       font-size: 0.95rem;
-      animation: accentPulse 3.8s ease-out infinite;
     }
 
     .brand-copy strong {
@@ -186,7 +199,23 @@
       box-shadow: inset 0 -1px 0 rgba(140, 243, 206, 0.22);
     }
 
-    main { padding-bottom: 40px; }
+    main {
+      padding-bottom: 40px;
+    }
+
+    section {
+      border-top: 1px solid var(--line);
+    }
+
+    .hero {
+      padding: 42px 0 0;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(360px, 0.98fr);
+      gap: 22px;
+    }
 
     .frame {
       border: 1px solid var(--line);
@@ -217,16 +246,6 @@
       opacity: 0.42;
       pointer-events: none;
       animation: frameSweep 7.5s linear infinite;
-    }
-
-    .hero {
-      padding: 42px 0 0;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.04fr) minmax(360px, 0.96fr);
-      gap: 22px;
     }
 
     .detail-copy,
@@ -290,8 +309,7 @@
     .section-card p,
     .stack-card p,
     .note span,
-    .timeline-item span,
-    .signal-card span {
+    .timeline-item span {
       color: var(--muted);
       line-height: 1.8;
     }
@@ -370,8 +388,7 @@
     .summary-cell,
     .section-card,
     .stack-card,
-    .note,
-    .signal-card {
+    .note {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--line);
       transition: transform 0.26s ease, border-color 0.26s ease, background-color 0.26s ease, box-shadow 0.26s ease;
@@ -380,8 +397,7 @@
     .summary-cell:hover,
     .section-card:hover,
     .stack-card:hover,
-    .note:hover,
-    .signal-card:hover {
+    .note:hover {
       transform: translateY(-4px);
       border-color: rgba(241, 220, 193, 0.28);
       background: rgba(255, 255, 255, 0.045);
@@ -396,8 +412,7 @@
     .summary-cell strong,
     .section-card h3,
     .stack-card h3,
-    .note strong,
-    .signal-card strong {
+    .note strong {
       display: block;
       margin-bottom: 6px;
       color: var(--ink);
@@ -431,88 +446,6 @@
     .summary-item span {
       color: var(--muted);
       text-align: right;
-    }
-
-    .section-shell {
-      padding: 56px 0;
-    }
-
-    .section-head {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
-      gap: 22px;
-      align-items: end;
-      margin-bottom: 28px;
-    }
-
-    .section-title {
-      max-width: 10ch;
-      font-size: clamp(1.56rem, 2.25vw, 2.3rem);
-      line-height: 1.1;
-      text-wrap: balance;
-    }
-
-    .section-desc {
-      margin: 0;
-      font-size: 0.99rem;
-      line-height: 1.84;
-    }
-
-    .grid-2,
-    .grid-3 {
-      display: grid;
-      gap: 16px;
-    }
-
-    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-
-    .surface-card { box-shadow: var(--shadow); }
-
-    .timeline-item {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 12px;
-      padding: 16px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.025);
-    }
-
-    .timeline-num {
-      width: 34px;
-      height: 34px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: rgba(140, 243, 206, 0.08);
-      color: var(--accent-2);
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.82rem;
-      animation: accentPulse 3.8s ease-out infinite;
-    }
-
-    .timeline-item strong {
-      display: block;
-      color: var(--ink);
-      margin-bottom: 4px;
-    }
-
-    .chip-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 16px;
-    }
-
-    .chip {
-      padding: 8px 12px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.03);
-      color: var(--muted);
-      font-size: 0.82rem;
-      font-family: "IBM Plex Mono", monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
     }
 
     .snapshot-grid {
@@ -654,6 +587,8 @@
     .signal-card {
       position: relative;
       padding: 16px 18px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
       overflow: hidden;
     }
 
@@ -667,9 +602,18 @@
       animation: signalTravel 3.4s linear infinite;
     }
 
+    .signal-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-size: 0.95rem;
+    }
+
     .signal-card span {
       display: block;
+      color: var(--muted);
       font-size: 0.92rem;
+      line-height: 1.7;
     }
 
     .signal-tag {
@@ -694,13 +638,97 @@
       animation: signalPulse 2.6s ease-out infinite;
     }
 
-    .notes {
-      display: grid;
-      gap: 14px;
-      margin-top: 20px;
+    .section-shell {
+      padding: 56px 0;
     }
 
-    .note { padding: 18px; }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+      gap: 22px;
+      align-items: end;
+      margin-bottom: 28px;
+    }
+
+    .section-title {
+      max-width: 10ch;
+      font-size: clamp(1.56rem, 2.25vw, 2.3rem);
+      line-height: 1.1;
+      text-wrap: balance;
+    }
+
+    .section-desc {
+      margin: 0;
+      font-size: 0.99rem;
+      line-height: 1.84;
+    }
+
+    .grid-2,
+    .grid-3 {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .surface-card {
+      box-shadow: var(--shadow);
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .timeline-num {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(140, 243, 206, 0.08);
+      color: var(--accent-2);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.82rem;
+    }
+
+    .timeline-item strong {
+      display: block;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .chip-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .chip {
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-family: "IBM Plex Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .note {
+      padding: 18px;
+    }
 
     footer {
       padding: 20px 0 36px;
@@ -736,26 +764,50 @@
     }
 
     @keyframes riseIn {
-      0% { opacity: 0; transform: translateY(26px) scale(0.985); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
+      0% {
+        opacity: 0;
+        transform: translateY(26px) scale(0.985);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
     @keyframes frameSweep {
-      0% { transform: translateX(0); opacity: 0; }
-      12% { opacity: 0.58; }
-      60% { opacity: 0.2; }
-      100% { transform: translateX(360%); opacity: 0; }
+      0% {
+        transform: translateX(0);
+        opacity: 0;
+      }
+      12% {
+        opacity: 0.58;
+      }
+      60% {
+        opacity: 0.2;
+      }
+      100% {
+        transform: translateX(360%);
+        opacity: 0;
+      }
     }
 
     @keyframes panelFloat {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-8px); }
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-8px);
+      }
     }
 
     @keyframes accentPulse {
       0%,
-      100% { box-shadow: 0 0 0 0 rgba(140, 243, 206, 0.08); }
-      50% { box-shadow: 0 0 0 12px rgba(140, 243, 206, 0); }
+      100% {
+        box-shadow: 0 0 0 0 rgba(140, 243, 206, 0.08);
+      }
+      50% {
+        box-shadow: 0 0 0 12px rgba(140, 243, 206, 0);
+      }
     }
 
     @keyframes titleShift {
@@ -770,25 +822,46 @@
     }
 
     @keyframes snapshotSweep {
-      0% { transform: translateY(-100%); }
-      100% { transform: translateY(160%); }
+      0% {
+        transform: translateY(-100%);
+      }
+      100% {
+        transform: translateY(160%);
+      }
     }
 
     @keyframes meterPulse {
-      0% { width: 56%; opacity: 0.8; }
-      50% { width: 72%; opacity: 1; }
-      100% { width: 60%; opacity: 0.84; }
+      0% {
+        width: 56%;
+        opacity: 0.8;
+      }
+      50% {
+        width: 72%;
+        opacity: 1;
+      }
+      100% {
+        width: 60%;
+        opacity: 0.84;
+      }
     }
 
     @keyframes signalTravel {
-      0% { transform: translateX(-120%); }
-      100% { transform: translateX(180%); }
+      0% {
+        transform: translateX(-120%);
+      }
+      100% {
+        transform: translateX(180%);
+      }
     }
 
     @keyframes signalPulse {
       0%,
-      100% { box-shadow: 0 0 0 0 rgba(140, 243, 206, 0.22); }
-      50% { box-shadow: 0 0 0 10px rgba(140, 243, 206, 0); }
+      100% {
+        box-shadow: 0 0 0 0 rgba(140, 243, 206, 0.22);
+      }
+      50% {
+        box-shadow: 0 0 0 10px rgba(140, 243, 206, 0);
+      }
     }
 
     .reveal {
@@ -801,6 +874,11 @@
       animation:
         riseIn 0.72s ease both,
         panelFloat 6.8s ease-in-out 1s infinite alternate;
+    }
+
+    .brand-badge,
+    .timeline-num {
+      animation: accentPulse 3.8s ease-out infinite;
     }
 
     .stagger-1 { animation-delay: 0.06s; }
@@ -816,19 +894,24 @@
       .footer-grid {
         grid-template-columns: 1fr;
       }
-
-      .snapshot-surface,
-      .snapshot-side {
-        min-height: auto;
-      }
     }
 
     @media (max-width: 760px) {
-      .container { padding: 0 16px; }
+      .container {
+        padding: 0 16px;
+      }
 
-      .nav-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .brand { grid-column: 1 / -1; }
-      .nav-grid > * { min-height: 58px; }
+      .nav-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .brand {
+        grid-column: 1 / -1;
+      }
+
+      .nav-grid > * {
+        min-height: 58px;
+      }
 
       .detail-copy,
       .summary,
@@ -845,22 +928,30 @@
         max-width: none;
       }
 
-      .summary-grid { grid-template-columns: 1fr; }
-      .grid-3 { grid-template-columns: 1fr; }
-
-      .snapshot-line {
+      .summary-grid {
         grid-template-columns: 1fr;
-        gap: 10px;
+      }
+
+      .snapshot-surface,
+      .snapshot-side {
+        min-height: auto;
       }
 
       .snapshot-head,
-      .snapshot-foot {
+      .snapshot-foot,
+      .snapshot-line {
         gap: 10px;
+      }
+
+      .snapshot-line {
+        grid-template-columns: 1fr;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
+      html {
+        scroll-behavior: auto;
+      }
 
       body::after,
       .frame::after,
@@ -901,7 +992,7 @@
         </a>
         <a class="nav-link" href="index.html">首页</a>
         <a class="nav-link" href="#overview">概览</a>
-        <a class="nav-link" href="#runtime">快照</a>
+        <a class="nav-link" href="#workflow">流程</a>
         <a class="nav-link" href="#stack">技术栈</a>
       </div>
     </header>
@@ -910,43 +1001,43 @@
       <section class="hero">
         <div class="hero-grid">
           <article class="frame detail-copy reveal">
-            <div class="eyebrow">项目详情 / 群聊知识代理</div>
-            <h1>赛博丁真 QQ 群机器人</h1>
-            <p>这是一个面向 QQ 群聊场景的知识代理系统。前半段是 Streamlit 录入台和 `ingest/` 管线，负责文档结构化、切 chunk、写入 Qdrant 与 BM25；后半段是 NoneBot2 + OneBot v11 + LangGraph 组成的响应链路。</p>
-            <p>群聊消息、最近历史和摘要写入 SQLite，检索侧走 `Qdrant + BM25 + FlashRank`，让知识库更新、RAG 回答和上下文记忆都能长期维护。</p>
+            <div class="eyebrow">项目详情 / 内容自动化系统</div>
+            <h1>wechat-agent-lite</h1>
+            <p>这是一个面向微信公众号持续更新场景的轻量自动化系统。FastAPI 提供控制台和 API，APScheduler 定时触发 `health` / `main` 任务，在小规格服务器上完成抓取、筛选、写作、配图、草稿发布和日报回传。</p>
+            <p>主流程由 `RuntimeFacade` 驱动，运行态写入 SQLite：`runs`、`run_steps`、`llm_calls`、`source_health_states` 都能直接拿来排障、复盘和手动重跑。</p>
             <div class="hero-actions">
-              <a class="btn btn-primary" href="https://github.com/Frank-zhang-98/qq_bot_project">查看源码</a>
+              <a class="btn btn-primary" href="https://github.com/Frank-zhang-98/wechat-agent-lite-public">查看源码</a>
               <a class="btn btn-secondary" href="index.html#projects">返回项目区</a>
             </div>
           </article>
 
           <aside class="frame summary reveal stagger-1" aria-label="项目摘要">
             <div class="card-kicker">项目摘要</div>
-            <h2>Streamlit 录入台和 NoneBot2 / LangGraph 响应链路组成的群聊知识代理。</h2>
-            <p>`all_docs.jsonl`、`chunks.jsonl`、Qdrant collection、BM25 索引和 `bot.sqlite` 一起构成这套系统的运行底座。</p>
+            <h2>FastAPI 控制台、APScheduler 定时任务和 SQLite 运行态组成的内容后台。</h2>
+            <p>系统不只生成结果，也保留 step 级执行状态、模型调用审计和 source health，用来支持日常维护与 redo。</p>
             <div class="summary-grid">
               <div class="summary-cell">
-                <strong>面向场景</strong>
-                <span>QQ群知识检索与群聊问答</span>
+                <strong>最近更新</strong>
+                <span>2026-04</span>
               </div>
               <div class="summary-cell">
-                <strong>核心结构</strong>
-                <span>录入维护台 + 群聊响应链路</span>
+                <strong>部署目标</strong>
+                <span>小规格 Ubuntu 服务器</span>
               </div>
               <div class="summary-cell">
-                <strong>检索方式</strong>
-                <span>向量 + BM25 + FlashRank</span>
+                <strong>运行形态</strong>
+                <span>FastAPI + 调度任务 + Web 控制台</span>
               </div>
               <div class="summary-cell">
-                <strong>长期能力</strong>
-                <span>记忆摘要、可追溯、可复用</span>
+                <strong>核心关注</strong>
+                <span>稳定性、可观察性、失败回退</span>
               </div>
             </div>
             <div class="summary-list">
-              <div class="summary-item"><strong>内容入库</strong><span>文件入库与结构化维护</span></div>
-              <div class="summary-item"><strong>混合检索</strong><span>向量召回 + 关键词召回</span></div>
-              <div class="summary-item"><strong>流程编排</strong><span>群聊响应与流程编排</span></div>
-              <div class="summary-item"><strong>会话记忆</strong><span>SQLite 记忆与摘要更新</span></div>
+              <div class="summary-item"><strong>健康检查</strong><span>先检查，再进入主流程</span></div>
+              <div class="summary-item"><strong>来源维护</strong><span>来源维护与回退修复</span></div>
+              <div class="summary-item"><strong>写作与渲染</strong><span>正文与可发布输出</span></div>
+              <div class="summary-item"><strong>公众号草稿</strong><span>对接公众号草稿链路</span></div>
             </div>
           </aside>
         </div>
@@ -959,82 +1050,17 @@
               <div class="section-kicker">项目概览</div>
               <h2 class="section-title">项目概览</h2>
             </div>
-            <p class="section-desc">项目重点是把录入、索引、召回、重排、应答和摘要压进同一条技术链，而不是只做一个外层聊天壳。</p>
+            <p class="section-desc">项目把任务编排、状态持久化、抓取维护和发布接口放进同一个服务里，重点是持续运行而不是单次成功。</p>
           </div>
           <div class="grid-2">
             <article class="frame surface-card section-card reveal stagger-1">
               <h3>它解决什么问题</h3>
-              <p>当资料散在图片、表格、文档和零碎消息里时，群聊里的知识很快就会变成口口相传。这里把图片解析、JSONL 结构化、chunk 切分、向量索引、关键词索引和回答链路接成闭环。</p>
+              <p>当抓取、模型调用、图像处理和发布动作散落在不同脚本里时，系统既难维护，也难定位问题。这里把它们收束进同一条执行链，并把配置、步骤结果和异常信息一起持久化。</p>
             </article>
             <article class="frame surface-card section-card reveal stagger-2">
               <h3>它适合什么场景</h3>
-              <p>适合把群聊当成知识入口的团队、社群或兴趣小组，尤其适合资料更新频繁、成员流动大、需要 `@bot` 给出可追溯回答的场景。</p>
+              <p>适合需要稳定地产出公众号内容、但基础设施和维护预算都有限的场景，尤其适合 2C2G 一类小服务器部署，以及人工审核与自动流程并存的团队。</p>
             </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="runtime">
-        <div class="section-shell">
-          <div class="section-head reveal">
-            <div>
-              <div class="section-kicker">运行快照</div>
-              <h2 class="section-title">运行快照</h2>
-            </div>
-            <p class="section-desc">这里展示的是录入同步、hybrid retrieval、会话摘要和响应 trace 这些真实运行状态。</p>
-          </div>
-          <div class="snapshot-grid">
-            <article class="frame snapshot-panel reveal stagger-1">
-              <div class="snapshot-surface">
-                <div class="snapshot-head">
-                  <span>qq group / knowledge runtime</span>
-                  <span>onebot / rag / memory</span>
-                </div>
-                <div class="snapshot-lines">
-                  <div class="snapshot-line">
-                    <strong>document ingest + preview sync</strong>
-                    <span class="snapshot-metric">stable</span>
-                  </div>
-                  <div class="snapshot-line">
-                    <strong>hybrid retrieval / rerank / compose</strong>
-                    <span class="snapshot-metric">2.6s</span>
-                  </div>
-                  <div class="snapshot-line">
-                    <strong>session memory + summary refresh</strong>
-                    <span class="snapshot-metric">updated</span>
-                  </div>
-                  <div class="snapshot-line">
-                    <strong>group mention / answer traceability</strong>
-                    <span class="snapshot-metric">ready</span>
-                  </div>
-                </div>
-                <div class="snapshot-meter" aria-hidden="true"><span></span></div>
-                <div class="snapshot-foot">
-                  <span>hybrid retrieval first</span>
-                  <span>answer with evidence</span>
-                </div>
-              </div>
-            </article>
-
-            <aside class="frame snapshot-panel reveal stagger-2" aria-label="运行信号">
-              <div class="snapshot-side">
-                <div class="signal-card">
-                  <strong>Knowledge Ingest</strong>
-                  <span>图片、文档、CSV 与 JSONL 会先统一进入 `all_docs.jsonl`，再切分成 `chunks.jsonl` 并同步到 Qdrant / BM25。</span>
-                  <div class="signal-tag">signal online</div>
-                </div>
-                <div class="signal-card">
-                  <strong>Retrieval Trace</strong>
-                  <span>dense top30 与 BM25 top30 合并后进入 FlashRank，最后取 top4 注入 prompt，回答依据也更容易追溯。</span>
-                  <div class="signal-tag">queue observed</div>
-                </div>
-                <div class="signal-card">
-                  <strong>Session Memory</strong>
-                  <span>群聊消息写入 SQLite，按 session_key 保留最近 12 条历史，并在固定节奏上更新 summary。</span>
-                  <div class="signal-tag">memory ready</div>
-                </div>
-              </div>
-            </aside>
           </div>
         </div>
       </section>
@@ -1046,37 +1072,103 @@
               <div class="section-kicker">核心流程</div>
               <h2 class="section-title">核心流程能力</h2>
             </div>
-            <p class="section-desc">整体流程遵循“入库、切分、索引、检索、拼装、应答、总结”的闭环，知识维护和群聊响应共享同一套数据底座。</p>
+            <p class="section-desc">调度层只区分 `health` 和 `main` 两类任务，执行层再拆成明确的 step，并为每一步保留输入、状态和回退边界。</p>
           </div>
           <div class="timeline">
             <div class="timeline-item reveal stagger-1">
               <div class="timeline-num">01</div>
               <div>
-                <strong>Content Ingest / Maintenance Console</strong>
-                <span>通过 Streamlit 扫描目录或上传文件，支持图片结构化、文档预览编辑、增量更新与删除同步。</span>
+                <strong>Health Check / Source Maintenance</strong>
+                <span>启动前做健康检查，并持续记录来源状态；必要时尝试修复、降权、切换来源或停用。</span>
               </div>
             </div>
             <div class="timeline-item reveal stagger-1">
               <div class="timeline-num">02</div>
               <div>
-                <strong>Chunk / Embed / Hybrid Retrieval</strong>
-                <span>文档切分后写入 Qdrant，配套 BM25 索引，再将候选交给 FlashRank 重排，兼顾召回广度与精排质量。</span>
+                <strong>Fetch / Dedup / Rank / Select</strong>
+                <span>从多个来源抓取候选内容，去重后通过规则打分与模型重排来确定最终选题。</span>
               </div>
             </div>
             <div class="timeline-item reveal stagger-2">
               <div class="timeline-num">03</div>
               <div>
-                <strong>LangGraph Flow / Mention Response</strong>
-                <span>入口解析、触发判断、历史加载、RAG 检索、LLM 生成和回复输出放进同一条流程图里，方便控制群聊响应路径。</span>
+                <strong>Write / Quality Check / Render</strong>
+                <span>进入写作、事实补全、质量检查和渲染阶段，确保最终内容不只是生成出来，还能顺利进入发布链路。</span>
               </div>
             </div>
             <div class="timeline-item reveal stagger-3">
               <div class="timeline-num">04</div>
               <div>
-                <strong>SQLite 记忆 / 会话摘要</strong>
-                <span>消息按会话维度写入 SQLite，并在固定条数后更新摘要，减少提示词膨胀，同时保留对话的长期连续性。</span>
+                <strong>WeChat Draft / Daily Report</strong>
+                <span>将结果发布到公众号草稿，并通过日报或控制台输出运行情况，让系统具备操作和复盘价值。</span>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="runtime">
+        <div class="section-shell">
+          <div class="section-head reveal">
+            <div>
+              <div class="section-kicker">运行快照</div>
+              <h2 class="section-title">运行快照</h2>
+            </div>
+            <p class="section-desc">这里对应的是真实运行态：source health、draft queue、日报同步和人工接管点都能在数据库与控制台里对上。</p>
+          </div>
+
+          <div class="snapshot-grid">
+            <article class="frame snapshot-panel reveal stagger-1">
+              <div class="snapshot-surface">
+                <div class="snapshot-head">
+                  <span>content runtime / live board</span>
+                  <span>utc+8 / draft cycle</span>
+                </div>
+                <div class="snapshot-lines">
+                  <div class="snapshot-line">
+                    <strong>health_check / sources / render queue</strong>
+                    <span class="snapshot-metric">stable</span>
+                  </div>
+                  <div class="snapshot-line">
+                    <strong>topic ranking + model rerank</strong>
+                    <span class="snapshot-metric">2.1s</span>
+                  </div>
+                  <div class="snapshot-line">
+                    <strong>draft output sent to wechat staging</strong>
+                    <span class="snapshot-metric">1 pending</span>
+                  </div>
+                  <div class="snapshot-line">
+                    <strong>ops log + daily report synced</strong>
+                    <span class="snapshot-metric">updated</span>
+                  </div>
+                </div>
+                <div class="snapshot-meter" aria-hidden="true"><span></span></div>
+                <div class="snapshot-foot">
+                  <span>watchability first</span>
+                  <span>rollback ready</span>
+                </div>
+              </div>
+            </article>
+
+            <aside class="frame snapshot-panel reveal stagger-2" aria-label="运行信号">
+              <div class="snapshot-side">
+                <div class="signal-card">
+                  <strong>Source Health</strong>
+                  <span>`source_health_states` 会记录每个源的状态、失败次数、最后动作和检查时间。异常时优先降权、切源或停用。</span>
+                  <div class="signal-tag">signal online</div>
+                </div>
+                <div class="signal-card">
+                  <strong>Draft Queue</strong>
+                  <span>草稿进入待发布区本身就是正式状态，发布结果、draft status 和日报回传都能在同一条 run 里追踪。</span>
+                  <div class="signal-tag">queue observed</div>
+                </div>
+                <div class="signal-card">
+                  <strong>Human Override</strong>
+                  <span>关键节点保留人工判断、确认和回退入口，`redo_from_step` 这类能力也围绕运行记录展开。</span>
+                  <div class="signal-tag">manual ready</div>
+                </div>
+              </div>
+            </aside>
           </div>
         </div>
       </section>
@@ -1088,37 +1180,34 @@
               <div class="section-kicker">技术栈</div>
               <h2 class="section-title">技术栈与结构</h2>
             </div>
-            <p class="section-desc">核心技术来自实际代码与依赖配置，重点服务于群聊响应、混合检索、知识维护和会话记忆，而不是只追求模型调用本身。</p>
+            <p class="section-desc">技术选型偏稳健与直接，优先服务于可靠运行、数据库可追踪性和低资源部署，而不是追求复杂堆栈。</p>
           </div>
           <div class="grid-3">
             <article class="frame surface-card stack-card reveal stagger-1">
-              <h3>机器人入口与流程编排</h3>
-              <p>基于 NoneBot2 与 OneBot v11 处理群聊事件，LangGraph 把 ingress、guard、history、retrieve、call_llm、persist、summarize 串成一条状态图。</p>
+              <h3>服务与调度</h3>
+              <p>使用 Python、FastAPI 和 APScheduler 作为入口骨架，`RuntimeFacade` 负责触发主流程、health run、manual run 和 step redo。</p>
               <div class="chip-row">
                 <span class="chip">Python</span>
-                <span class="chip">NoneBot2</span>
-                <span class="chip">OneBot v11</span>
-                <span class="chip">LangGraph</span>
+                <span class="chip">FastAPI</span>
+                <span class="chip">APScheduler</span>
               </div>
             </article>
             <article class="frame surface-card stack-card reveal stagger-2">
-              <h3>检索引擎与知识库</h3>
-              <p>向量召回使用 Qdrant，关键词召回由 BM25 补足，再用 FlashRank 做重排。当前实现是 dense top30 + BM25 top30，去重后取 20，再重排到 top4。</p>
+              <h3>数据与状态</h3>
+              <p>通过 SQLAlchemy 组织 `config_entries`、`runs`、`run_steps`、`llm_calls` 和 `source_health_states`，把运行态沉淀成可查询结构。</p>
               <div class="chip-row">
-                <span class="chip">Qdrant</span>
-                <span class="chip">BM25</span>
-                <span class="chip">FlashRank</span>
-                <span class="chip">Jieba</span>
+                <span class="chip">SQLAlchemy</span>
+                <span class="chip">Config Entries</span>
+                <span class="chip">Runtime Records</span>
               </div>
             </article>
             <article class="frame surface-card stack-card reveal stagger-3">
-              <h3>维护台与会话记忆</h3>
-              <p>维护端使用 Streamlit 承载文件录入、预览编辑和增量同步，会话消息与摘要沉淀在 SQLite，本地还能直接排查 `all_docs.jsonl`、`chunks.jsonl` 和 `bot.sqlite`。</p>
+              <h3>抓取与页面能力</h3>
+              <p>抓取侧结合 requests、feed 解析和 Playwright，并保留 Scrapling fallback 与按 host 限流策略，兼顾普通抓取、复杂页面和低资源机器约束。</p>
               <div class="chip-row">
-                <span class="chip">Streamlit</span>
-                <span class="chip">SQLite</span>
-                <span class="chip">httpx / requests</span>
-                <span class="chip">python-dotenv</span>
+                <span class="chip">Requests</span>
+                <span class="chip">Scraping</span>
+                <span class="chip">Playwright</span>
               </div>
             </article>
           </div>
@@ -1132,20 +1221,20 @@
               <div class="section-kicker">设计重点</div>
               <h2 class="section-title">设计重点</h2>
             </div>
-            <p class="section-desc">这个项目把资料维护、检索和群聊记忆组织成一套可持续扩展的知识代理系统。</p>
+            <p class="section-desc">这些点决定了它更像一个可长期维护的系统，而不是一次性的自动化脚本集合。</p>
           </div>
           <div class="notes">
             <div class="note reveal stagger-1">
-              <strong>先把知识维护做成正式能力</strong>
-              <span>如果录入和维护依旧依赖人工零散更新，检索系统迟早会退化。这个项目把维护台放在前面，是为了让知识库更新本身也有结构。</span>
+              <strong>先做可靠性，再谈炫技</strong>
+              <span>并发默认按 host 收到 1，Scrapling 走单独限流，优先避免打爆 2C2G 机器、反爬和 SQLite 写竞争。</span>
             </div>
             <div class="note reveal stagger-2">
-              <strong>回答尽量带着检索依据</strong>
-              <span>回答建立在 dense / BM25 / rerank 之后的资料片段上，检索路径和依据也更容易排查。</span>
+              <strong>让人工干预成为正式能力</strong>
+              <span>关键节点保留人工判断空间，状态也更容易读懂。</span>
             </div>
             <div class="note reveal stagger-3">
-              <strong>记忆长度要稳，不要失控</strong>
-              <span>系统按固定消息数刷新摘要，保留长期连续感，同时避免 prompt 长度不断膨胀。</span>
+              <strong>把内容生产当作整条链路设计</strong>
+              <span>难点在于把来源、生成和发布连成稳定闭环。</span>
             </div>
           </div>
         </div>
@@ -1155,10 +1244,11 @@
     <footer class="container">
       <div class="footer-grid">
         <div>© 2026 ShadowKun</div>
-        <div>QQ 群聊知识代理详情</div>
-        <div>混合检索与会话记忆驱动的运行系统</div>
+        <div>wechat-agent-lite 项目详情</div>
+        <div>围绕工作流组织的内容发布系统</div>
       </div>
     </footer>
   </div>
+
 </body>
 </html>
